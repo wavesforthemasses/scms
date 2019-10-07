@@ -2,10 +2,12 @@
   import Nav from './Nav.svelte'
   import { fly, fade } from "svelte/transition"
   import { scrollY, windowHeight, menu } from '../stores/global';
+  import { isLoggedIn } from '../stores/user'
+  import { Login, Logout } from '../ui/Session'
+  import { Modal } from '../ui/Modal'
 
   const hideBefore = 0
   const fixedAfter = 0
-
 </script>
 
 <style>
@@ -43,7 +45,7 @@
   ul.links li+li{
     @apply ml-0;
   }
-  ul.links li a{
+  ul.links li>*{
     @apply h-full flex items-center px-4 text-primary;
   }
   ul.links li:hover *{
@@ -89,9 +91,17 @@
         <ul class="links">
           <li><a href="/">Home</a></li>
           <li><a href="/about/">About</a></li>
+          {#if $isLoggedIn}
+            <li on:click={() => menu.open('logout')}><span>Logout</span></li>
+          {:else}
+            <li on:click={() => menu.open('login')}><span>Login</span></li>
+          {/if}
         </ul>
         <a href="/" class="logo" aria-label="Homepage">&nbsp;</a>
       </div>
     </div>
   </header>
 {/if}
+
+<Modal open={$menu.main == "login"} on:close={menu.close}><Login /></Modal>
+<Modal open={$menu.main == "logout"} on:close={menu.close}><Logout /></Modal>

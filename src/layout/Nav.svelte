@@ -1,9 +1,11 @@
 <script>
   import { fade } from 'svelte/transition';
   import { menu } from '../stores/global';
+  import { isLoggedIn } from '../stores/user'
   import Contact from '../components/Contact.svelte';
   import { stores } from '@sapper/app';
   const { page } = stores();
+
   $: if($page.path) menu.close()
 
 </script>
@@ -31,6 +33,11 @@
     <ul class="links" in:fade={{delay: 300}}>
       <li><a href="/">Home</a></li>
       <li><a href="/about/">About</a></li>
+      {#if $isLoggedIn}
+        <li on:click={() => menu.open('logout')}><span>Logout</span></li>
+      {:else}
+        <li on:click={() => menu.open('login')}><span>Login</span></li>
+      {/if}
     </ul>
   {/if}
   </div>

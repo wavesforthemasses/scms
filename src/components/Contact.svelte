@@ -27,20 +27,20 @@
 </script>
 
 <style>
-  .contatto{
+  .contact{
     @apply flex flex-col text-black items-center justify-center p-6 w-full min-h-screen;
     background-image: linear-gradient(45deg, #e9e9e9, #f9f9f9);
   }
-  .contatto :global(form){
+  .contact :global(form){
     @apply w-full max-w-lg;
   }
-  .contatto :global(input), .contatto :global(textarea){
+  .contact :global(input), .contact :global(textarea){
     @apply relative appearance-none block w-full bg-gray-400 text-black rounded py-3 px-4 mb-3 leading-tight;
   }
-  .contatto :global(.btn){
+  .contact :global(.btn){
     @apply bg-secondary mt-6 h-16 w-16 rounded-full uppercase font-body font-bold mx-auto block;
   }
-  .contatto :global(.btn:hover){
+  .contact :global(.btn:hover){
     @apply bg-primary;
   }
   h2{
@@ -59,7 +59,7 @@
   }
 </style>
 
-<div class="contatto">
+<div class="contact">
 {#if done}
   <h2>Thanks!</h2>
   <h3>We'll contact you asap</h3>

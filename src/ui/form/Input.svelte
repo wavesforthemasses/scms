@@ -1,6 +1,7 @@
 <script>
   export let name;
   export let label = false;
+  export let type = 'text';
   export let hint = false;
   export let placeholder = "";
 	export let value = "";
@@ -39,8 +40,9 @@
 
 	<input
 		id={name}
-		name={name}
-		value={value}
+		{name}
+    {type}
+		{value}
     class="focus:outline-none focus:bg-white focus:border-gray-500 cursor-text"
     placeholder={placeholder}
     on:input={(e) => {

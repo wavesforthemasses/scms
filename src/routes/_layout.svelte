@@ -1,6 +1,7 @@
 <script>
   import Header from '../layout/Header.svelte'
   import Footer from '../layout/Footer.svelte'
+  import { Session } from '../ui/Session'
 </script>
 
 <style>
@@ -19,12 +20,13 @@
   }
 </style>
 
-<div class="loading" style="display: flex; justify-content: center; align-items: center; background: #47b; color: #fff; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1000;">
+<div class="loading" style="display: flex; justify-content: center; align-items: center; background: #000; color: #fff; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1000;">
   Attendi...
 </div>
 <main>
   <Header />
   <single>
+    <Session />
     <slot />
   </single>
   <Footer />

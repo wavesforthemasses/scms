@@ -3,6 +3,8 @@
     "projects": {
       "default": "YOUR FIREBASE PROJECT ID"
     },
+  /firebase
+    /config.js
 
 Terminal
   run:
