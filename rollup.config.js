@@ -73,7 +73,10 @@ export default {
 			}),
 			svelte({
 				generate: 'ssr',
-				dev
+				dev,
+				preprocess: {
+          style: svelte_preprocess_postcss(),
+        },
 			}),
 			resolve({
 				dedupe

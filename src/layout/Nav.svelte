@@ -1,12 +1,13 @@
 <script>
   import { fade } from 'svelte/transition';
-  import { menu } from '../stores/global';
+  import { menu, path } from '../stores/global';
   import { isLoggedIn } from '../stores/user'
   import Contact from '../components/Contact.svelte';
   import { stores } from '@sapper/app';
   const { page } = stores();
+  $: path.set($page.path)
 
-  $: if($page.path) menu.close()
+  $: if($path) menu.close()
 
 </script>
 
@@ -93,7 +94,7 @@
   }
 
   .menulinks .circleBTN{
-    @apply flex h-full bg-secondary text-white cursor-pointer m-4 rounded-full p-3;
+    @apply flex h-full bg-secondary text-white cursor-pointer mr-4 mb-12 rounded-full p-3;
   }
   .menulinks .circleBTN svg{
     @apply fill-current;

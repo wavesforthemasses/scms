@@ -6,13 +6,13 @@
 
 <style>
   main{
-    @apply font-body text-black text-base leading-relaxed flex-1 flex relative justify-between flex-col min-h-screen;
+    @apply font-body text-black text-base leading-relaxed flex-1 flex relative justify-between flex-col min-h-screen w-screen;
+  }
+  .loading{
+    @apply hidden;
   }
   :global(p+p){
     @apply mt-4;
-  }
-  .loading{
-    display: none !important;
   }
   main :global(h1, h2, h3, h4, h5, h6){ @apply font-head; }
   single{
@@ -20,9 +20,6 @@
   }
 </style>
 
-<div class="loading" style="display: flex; justify-content: center; align-items: center; background: #000; color: #fff; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1000;">
-  Attendi...
-</div>
 <main>
   <Header />
   <single>
@@ -31,3 +28,4 @@
   </single>
   <Footer />
 </main>
+<div class="loading" style="top:0;right:0;left:0;bottom:0;z-index:9999;background-color:#fff;background-image: url('loading.gif');background-size: 1.5rem;background-repeat:no-repeat;background-position:center;position:absolute;"></div>

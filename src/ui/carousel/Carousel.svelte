@@ -22,7 +22,7 @@
 
 <style>
 	.carousel{
-		@apply bg-gray-700 flex items-center relative overflow-hidden;
+		@apply bg-gray-700 flex items-center relative overflow-hidden bg-center bg-no-repeat;
 		max-height: 66.6vw;
 	}
   svg{
@@ -33,7 +33,7 @@
   }
 </style>
 
-<div class="carousel" style={`height: ${height};`}>
+<div class="carousel" style={`height: ${height}; background-image: url('loading.gif'); background-size: 1.5rem;`}>
 	{#if slides > 1}
 	  <button class="carousel-nav left-0 focus:outline-none" on:click={prevSlide}>
 	    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7.05 9.293L6.343 10 12 15.657l1.414-1.414L9.172 10l4.242-4.243L12 4.343z"/></svg>

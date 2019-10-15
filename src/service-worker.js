@@ -34,6 +34,9 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
 	if (event.request.method !== 'GET' || event.request.headers.has('range')) return;
 
+	// don't cache firestore
+	if(event.request.url.indexOf('firestore.googleapis.com') > -1) return;
+
 	const url = new URL(event.request.url);
 
 	// don't try to handle e.g. data: URIs

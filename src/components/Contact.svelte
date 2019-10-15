@@ -9,7 +9,7 @@
                      E-Mail: ${e.detail.email}\n
                      Phone: ${e.detail.phone}\n
                      Message: ${e.detail.message}`
-    fetch('https://us-central1-carlo-feb6a.cloudfunctions.net/sendMail', {
+    fetch('/sendMail', {
       method: 'POST',
       body: JSON.stringify({from: e.detail.email, name: e.detail.name, txt: message}),
       headers: {

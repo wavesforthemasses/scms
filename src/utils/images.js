@@ -20,14 +20,21 @@ const wrap = (img, placeholder) => {
 };
 
 const lazy = (node, params = {}) => {
-  if(node.tagName === 'IMG'){
-    const src = node.getAttribute('lazySrc');
-    if(src){
+  let host;
+  let src;
+  let smallsrc;
+  src = node.tagName === 'IMG' ? node.getAttribute('lazySrc') : params.src;
+  if(src){
+    host = /^http([s]*)\:\/\/([^\/]+)\//.test(src) ? src.replace(/^http([s]*)\:\/\/([^\/]+)\/.*/im, "http$1://$2/") : "";
+    src = src.replace(host, "")
+    if(!(/^images/.test(src))) src = `images/${src}`
+    smallsrc = src.replace(/^images/, "g")
+    if(node.tagName === 'IMG'){
       const placeholder = node.cloneNode();
-      placeholder.setAttribute('src', `g/${src}`);
+      placeholder.setAttribute('src', `${host}${smallsrc}`);
       const wrapper = wrap(node, placeholder);
-      placeholder.setAttribute('style', 'position: absolute; top: 0px; left: 0px; width: 100%; z-index: 10;');
-      const realSrc = `images/${src}`
+      placeholder.setAttribute('style', 'position: absolute; top: 0px; left: 0px; width: 100%; z-index: 10; filter: blur(5px);');
+      const realSrc = `${host}${src}`
       loaded(realSrc).onload = () => {
         node.setAttribute('src', realSrc);
         node.removeAttribute('lazySrc');
@@ -40,11 +47,13 @@ const lazy = (node, params = {}) => {
         }
         setTimeout(() => unwrap(wrapper, node) , 10 * i )
       }
-    }
-  }else{
-    if(params.src){
-      node.setAttribute('style', `background-image: url(g/${params.src});`);
-      loaded(`images/${params.src}`).onload = () => node.style.backgroundImage = `url('images/${params.src}')`;
+    }else{
+      const placeholderDIV = node.querySelectorAll(".placeholder")[0];
+      loaded(src).onload = () => {
+        node.style.backgroundImage = `url('${src}')`
+        node.classList.add('remove-placeholder')
+        setTimeout(() => placeholderDIV.remove() , 10000 )
+      }
     }
   }
 

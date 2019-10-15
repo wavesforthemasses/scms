@@ -1,9 +1,10 @@
 {
-	"background_color": "#ffffff",
+	"background_color": "#555",
 	"theme_color": "#333333",
 	"name": "YOUR APP NAME",
 	"short_name": "YOUR APP SHORT NAME",
-	"display": "minimal-ui",
+	"display": "standalone",
+	"orientation": "portrait-primary",
 	"start_url": "/",
 	"icons": [
 		{

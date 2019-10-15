@@ -14,7 +14,7 @@
 
 <style>
   .map{
-    @apply relative w-full bg-gray-200;
+    @apply relative w-full bg-gray-200 bg-center bg-no-repeat;
   }
   .loading{
     @apply inset-0 absolute z-40 text-black block text-center;
@@ -29,9 +29,6 @@
             filter: grayscale(100%);
   }
 </style>
-<div class="map" use:onVisible={{start: 'start', cb: () => loadMe = true}}>
+<div class="map" use:onVisible={{start: 'start', cb: () => loadMe = true}} style={`background-image: url('loading.gif'); background-size: 1.5rem;`}>
   <iframe {src} title="Il nostro indirizzo è Via Marchese di Villabianca 70, Palermo - Italia" bind:this={f}></iframe>
-  {#if !loaded}
-    <span class="loading">Caricamento mappa...</span>
-  {/if}
 </div>

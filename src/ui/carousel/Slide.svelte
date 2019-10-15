@@ -46,29 +46,37 @@
 </script>
 
 <style>
-  .carousel-slide{ @apply h-full w-full absolute bg-no-repeat bg-center bg-cover shadow-carousel; }
+  .carousel-slide{ @apply h-full w-full absolute bg-no-repeat bg-center bg-cover; }
+  .carousel-slide.remove-placeholder .placeholder{
+    transition: all 1s;
+    @apply opacity-0;
+  }
+  .carousel-slide.overlay-active{
+    @apply shadow-carousel;
+    transition: box-shadow 0.5s ease-in-out .5s;
+  }
   .carousel-slide .inner{ @apply text-white inset-0 absolute flex flex-col justify-center items-center text-center; }
-  .carousel-slide :global(h1){ @apply font-black text-2xl; }
-  .carousel-slide :global(h2){ @apply font-black text-2xl; }
-  .carousel-slide :global(h3){ @apply w-11/12 text-center; }
-  .carousel-slide :global(.description){ @apply text-base text-center; }
-  .overlay{
+  .carousel-slide .overlay{
     @apply bg-primary inset-0 absolute opacity-0;
     clip-path: circle(0% at 90% 20%);
     transition: clip-path .5s, opacity .5s ease-in-out;
   }
-  .overlay-active .overlay{
+  .carousel-slide.overlay-active .overlay{
     @apply opacity-75;
     clip-path: circle(100%);
     transition: clip-path .5s .5s, all .5s ease-in-out;
   }
-  .inner{
+  .carousel-slide .inner>*{
     @apply opacity-0;
     transition: all .5s .25s ease-in-out;
   }
-  .overlay-active .inner{
+  .carousel-slide.overlay-active .inner>*{
     @apply opacity-100;
   }
+  .carousel-slide :global(h1){ @apply font-black text-2xl; }
+  .carousel-slide :global(h2){ @apply font-black text-2xl; }
+  .carousel-slide :global(h3){ @apply w-11/12 text-center; }
+  .carousel-slide :global(.description){ @apply text-base text-center; }
   @screen md {
     .carousel-slide :global(h1){ @apply text-4xl; }
     .carousel-slide :global(h2){ @apply text-4xl; }
@@ -86,8 +94,10 @@
     on:mouseover={() => { if(overlayON == 'hover') overlayShow = true }}
     on:mouseout={() => { if(overlayON == 'hover') overlayShow = false }}
     in:slide|local={{duration: 1000}}
-    out:slide|local={{duration: 1000}}
-    on:introend={() => overlayShow = true}>
+    out:slide|local={{duration: 1000}}>
+    {#if bkg}
+      <div class="placeholder" style={`background-image: url(g/${bkg}); background-repeat: no-repeat; background-size: cover; background-position: center; position: absolute; top: 0; bottom: 0; right: 0; left: 0; filter: blur(5px); transform: scale(1.05);`}></div>
+    {/if}
     {#if overlay}
       <div class="overlay"></div>
     {/if}

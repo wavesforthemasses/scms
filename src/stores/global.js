@@ -2,6 +2,7 @@ import { writable } from 'svelte/store';
 
 export const scrollY = writable(0)
 export const windowHeight = writable(0)
+export const path = writable(null)
 
 const menuStore = () => {
 	const { subscribe, set, update } = writable({main: null, sub: null});

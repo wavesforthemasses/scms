@@ -8,6 +8,5 @@
     auth.onAuthStateChanged(u => {
       u ? user.loggedIn(u) : user.loggedOut()
     });
-
 	})
 </script>

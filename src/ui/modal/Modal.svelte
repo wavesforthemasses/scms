@@ -1,34 +1,40 @@
 <script>
   import { Button } from "../../ui/Form"
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import {fade, fly} from 'svelte/transition'
-  import { stores } from '@sapper/app';
-	const { page } = stores();
-  let prevPage = $page.path
+  import { path } from '../../stores/global';
+  let prevPage = $path
 
   const changePage = (p) => {
-    if($page.path !== prevPage){
-      prevPage = $page.path
+    if(p !== prevPage){
+      prevPage = p
       closeMe()
       return true
     }
   }
-  $: changePage($page)
+  $: changePage($path)
 
 	const dispatch = createEventDispatcher();
   export let open = false
 
-  onMount(() => {
+  $: if(open) openMe()
+
+  const openMe = () => {
     dispatch("open")
-  })
+    document.getElementsByTagName('body')[0].classList.add('modal-open');
+  }
 
   const closeMe = () => {
     open = false
     dispatch("close")
+    document.getElementsByTagName('body')[0].classList.remove('modal-open');
   }
 </script>
 
 <style>
+  :global(body.modal-open){
+    @apply overflow-hidden;
+  }
   .modal-shadow{
     @apply fixed inset-0 w-screen h-screen;
     background: radial-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
@@ -36,28 +42,38 @@
   }
 
   .modal-wrapper{
-    @apply fixed flex justify-center items-center inset-0 w-screen h-screen;
+    @apply fixed flex justify-center items-center inset-0 w-screen h-screen overflow-y-auto;
     z-index: 9997;
   }
 
-	.modal {
-    @apply w-10/12 max-h-screen p-4 rounded bg-white text-black;
+  .modal {
+    @apply w-10/12 p-4 rounded bg-white text-black;
     background-image: linear-gradient(45deg, #e9e9e9, #f9f9f9);
     z-index: 9999;
+    max-height: 90vh;
+    box-sizing: content-box;
 	}
+
+  .modal .content{
+    @apply overflow-auto;
+    max-height: inherit;
+  }
 
   .modal :global(h3){
     @apply uppercase text-xl font-black;
   }
 
-	.close-button :global(.btn){
-    @apply h-16 w-16 font-head font-bold text-white;
+  .close-button :global(.btn){
+    @apply h-8 w-8 font-head font-bold text-white;
   }
 
-  @screen md {
+  @screen sm {
 		.modal{
 			@apply w-1/2;
 		}
+    .close-button :global(.btn){
+      @apply h-16 w-16;
+    }
 	}
 </style>
 

@@ -3,6 +3,7 @@ const admin = require('firebase-admin');
 const nodemailer = require('nodemailer');
 const cors = require('cors')({origin: true});
 admin.initializeApp(functions.config().firebase);
+const dotenv = require('dotenv/config');
 
 // We have to import the built version of the server middleware.
 const { sapper } = require('./__sapper__/build/server/server.js');
@@ -16,11 +17,8 @@ const oneWeek = oneDay * 7
 const oneMonth = oneWeek * 4
 const oneYear = oneDay * 365
 const emailSender = {
-  service: 'gmail',
-  auth: {
-    user: '***@gmail.com',
-    pass: ''
-  }
+  service: functions.config().email.service,
+  auth: functions.config().email.auth
 }
 
 exports.ssr = functions.https.onRequest((req, res) => {
@@ -45,7 +43,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
 
     const mailOptions = {
       from: `${name} <${from}>`,
-      to: 'Name <***@gmail.com>',
+      to: `<${functions.config().email.dest}>`,
       subject: 'Subject',
       text: txt
     };
