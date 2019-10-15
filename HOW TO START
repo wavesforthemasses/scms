@@ -1,6 +1,0 @@
-npx degit "wavesforthemassrs/scms" my-app
-cd my-app
-npm install # or yarn!
-npm run dev
-
-CHECK THE NEXT STEPS ON HOMEPAGE

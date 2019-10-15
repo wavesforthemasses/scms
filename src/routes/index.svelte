@@ -30,9 +30,9 @@
       <strong>open /firebase.json and /.firebaserc</strong>
       <p>Set the firebase project id</p>
       <pre>
-        "projects": {
+        "projects": &#x7B;
           "default": "YOUR FIREBASE PROJECT ID"
-        }
+        &#x7D;
       </pre>
     </li>
     <li>
@@ -55,8 +55,6 @@
       <pre>
         rm /static/index.html
         cd /functions
-        npm install
-        cd ..
         npm install
       </pre>
     </li>

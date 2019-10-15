@@ -16,9 +16,6 @@
   .map{
     @apply relative w-full bg-gray-200 bg-center bg-no-repeat;
   }
-  .loading{
-    @apply inset-0 absolute z-40 text-black block text-center;
-  }
   iframe{
     @apply w-full h-64 border-0 overflow-hidden m-0;
     pointer-events:none;
