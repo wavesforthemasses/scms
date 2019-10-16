@@ -1,4 +1,4 @@
-import secret from 'secret.js'
+import secret from './secret.js'
 const vars = {
   firebase: {
     apiKey: "",
