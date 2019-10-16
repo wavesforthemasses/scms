@@ -23,8 +23,8 @@
   <h2>IMPORTANT</h2>
   <ol>
     <li>
-      <strong>open /.env</strong>
-      <p>Set all the env variables</p>
+      <strong>open /env.js</strong>
+      <p>Set all the variables</p>
     </li>
     <li>
       <strong>open /firebase.json and /.firebaserc</strong>
@@ -56,20 +56,6 @@
         rm /static/index.html
         cd /functions
         npm install
-      </pre>
-    </li>
-  </ol>
-  <h2>EMAILS</h2>
-  <ol>
-    <li>
-      <strong>open the Terminal</strong>
-      <p>To set the emails run the following command but change it using your own data:</p>
-      <pre>
-        firebase functions:config:set email.service="gmail" email.auth.user="email@email.est" email.auth.pass="mypass" email.dest="email@email.est"
-      </pre>
-      <p>To check that everything is ok run this command:</p>
-      <pre>
-        firebase functions:config:get
       </pre>
     </li>
   </ol>

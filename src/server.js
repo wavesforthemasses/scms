@@ -5,6 +5,7 @@ import * as sapper from '@sapper/server';
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
+const cv = customVars;
 
 const server = polka(); // You can also use Express
 
@@ -23,4 +24,4 @@ if(dev){
 	});
 }
 
-export { sapper };
+export { sapper, cv};

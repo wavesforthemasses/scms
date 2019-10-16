@@ -57,6 +57,7 @@
   .modal .content{
     @apply overflow-auto;
     max-height: inherit;
+    box-sizing: border-box;
   }
 
   .modal :global(h3){

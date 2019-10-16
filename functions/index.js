@@ -6,7 +6,7 @@ admin.initializeApp(functions.config().firebase);
 const dotenv = require('dotenv/config');
 
 // We have to import the built version of the server middleware.
-const { sapper } = require('./__sapper__/build/server/server.js');
+const { sapper, cv } = require('./__sapper__/build/server/server.js');
 //import * as sapper from '@sapper/server';
 
 middleware = sapper.middleware();
@@ -17,8 +17,7 @@ const oneWeek = oneDay * 7
 const oneMonth = oneWeek * 4
 const oneYear = oneDay * 365
 const emailSender = {
-  service: functions.config().email.service,
-  auth: functions.config().email.auth
+  ...cv.email.sender
 }
 
 exports.ssr = functions.https.onRequest((req, res) => {
@@ -43,7 +42,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
 
     const mailOptions = {
       from: `${name} <${from}>`,
-      to: `<${functions.config().email.dest}>`,
+      to: `${cv.email.receiver.name} <${cv.email.receiver.address}>`,
       subject: 'Subject',
       text: txt
     };
